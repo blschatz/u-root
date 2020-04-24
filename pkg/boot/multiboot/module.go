@@ -46,6 +46,11 @@ func (m *multiboot) loadModules() (modules, error) {
 
 	loaded.fix(uint32(cmdlineRange.Start))
 	m.loadedModules = loaded
+
+	for i, mod := range loaded {
+		log.Printf("Added module %s at [%#x, %#x)", m.modules[i].Name, mod.Start, mod.End)
+	}
+
 	return loaded, nil
 }
 
@@ -113,8 +118,6 @@ func bufAlignUp(buf *bytes.Buffer) error {
 }
 
 func (m *module) loadModule(buf *bytes.Buffer, r io.ReaderAt, name string) error {
-	log.Printf("Adding module %v", name)
-
 	// place start of each module to a beginning of a page.
 	if err := bufAlignUp(buf); err != nil {
 		return err
@@ -127,7 +130,6 @@ func (m *module) loadModule(buf *bytes.Buffer, r io.ReaderAt, name string) error
 	}
 
 	m.End = uint32(buf.Len())
-
 	return nil
 }
 

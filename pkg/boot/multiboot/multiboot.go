@@ -242,6 +242,7 @@ func (m *multiboot) load(debug bool, ibft *ibft.IBFT) error {
 	// TODO: the kernel is opened like 4 separate times here. Just open it
 	// once and pass it around.
 
+	//var multibootHeader *header
 	multibootHeader, err := parseHeader(uio.Reader(m.kernel))
 	if err == ErrHeaderNotFound {
 		// We don't even need the header at the moment. Just need to

@@ -16,8 +16,8 @@
 #define DATA_SEGMENT	0x00CF92000000FFFF
 #define CODE_SEGMENT	0x00CF9A000000FFFF
 
-// #define MAGIC	0x2BADB002
-#define MAGIC	0x1BADB005
+#define MAGIC	0x2BADB002
+//#define MAGIC	0x1BADB005
 
 TEXT ·start(SB),NOSPLIT,$0
 	// Create GDT pointer on stack.
